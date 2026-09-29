@@ -15,7 +15,8 @@ let typingBubble=null;
 function addMsg(kind,text){
   const row=document.createElement('div');row.className=`msg ${kind}`;
   const who=document.createElement('span');who.className='who';
-  who.textContent=kind==='user'?'YOU':'IRIS';
+  const stamp=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  who.textContent=(kind==='user'?'YOU':'IRIS')+' · '+stamp;
   const b=document.createElement('div');b.className='bubble';b.textContent=text;
   row.appendChild(who);row.appendChild(b);messages.appendChild(row);
   messages.scrollTop=messages.scrollHeight;
@@ -37,7 +38,8 @@ function setState(s,detail){
   const base=STATUS_TEXT[s]||s;
   statusText.textContent=detail?`${base} · ${detail}`:(handsFree&&s==='idle'?'Hands-free — just speak':base);
   const cap=$('stageStatus');
-  if(cap)cap.textContent=({idle:'SYSTEMS NOMINAL',listening:'AUDIO CAPTURE ACTIVE',thinking:'PROCESSING…',speaking:'VOICE OUTPUT ACTIVE'})[s]||'SYSTEMS NOMINAL';
+  if(cap){cap.classList.remove('err');
+    cap.textContent=({idle:'SYSTEMS NOMINAL',listening:'AUDIO CAPTURE ACTIVE',thinking:'PROCESSING…',speaking:'VOICE OUTPUT ACTIVE'})[s]||'SYSTEMS NOMINAL'}
 }
 function setError(text){statusText.textContent=text;statusEl.className='status-line err'}
 
@@ -45,8 +47,12 @@ function setError(text){statusText.textContent=text;statusEl.className='status-l
 function connect(){
   ws=new WebSocket(WS_URL);ws.binaryType='arraybuffer';
   ws.onopen=()=>{wsReady=true;badge.textContent='ONLINE';badge.className='badge on';
-    talkBtn.disabled=false;handsBtn.disabled=false;setState('idle')};
-  ws.onclose=()=>{wsReady=false;badge.textContent='OFFLINE';badge.className='badge';talkBtn.disabled=true;
+    talkBtn.disabled=false;handsBtn.disabled=false;
+    $('textInput').disabled=false;$('sendBtn').disabled=false;setState('idle')};
+  ws.onclose=()=>{wsReady=false;badge.textContent='OFFLINE';badge.className='badge';
+    talkBtn.disabled=true;handsBtn.disabled=true;
+    $('textInput').disabled=true;$('sendBtn').disabled=true;
+    const cap=$('stageStatus');if(cap){cap.classList.add('err');cap.textContent='VOICE LINK OFFLINE'}
     setError('voice server offline — start voice\\START_VOICE.bat');setTimeout(connect,2000)};
   ws.onerror=()=>ws.close();
   ws.onmessage=e=>{
@@ -243,14 +249,14 @@ async function startCapture(){
   };
   src.connect(micNode);micNode.connect(micCtx.destination);
   capturing=true;ws.send(JSON.stringify({type:'start'}));
-  talkBtn.classList.add('rec');$('talkLabel').textContent='Release to send';setState('listening');
+  talkBtn.classList.add('rec');$('talkLabel').textContent='RELEASE TO SEND';setState('listening');
 }
 function stopCapture(){
   if(!capturing)return;
   capturing=false;micLevel=0;
   const bar=$('micBar');if(bar)bar.style.width='0%';
   micNode?.disconnect();micNode=null;
-  talkBtn.classList.remove('rec');$('talkLabel').textContent='Hold to talk';
+  talkBtn.classList.remove('rec');$('talkLabel').textContent='HOLD TO TALK';
   if(wsReady)ws.send(JSON.stringify({type:'stop',handsfree:handsFree}));
   stopPlayback();          // barge-in: talking interrupts the robot's audio
 }

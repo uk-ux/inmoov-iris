@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>IRIS · INMOOV OS</title>
-  <link rel="stylesheet" href="orb.css?v=15">
+  <link rel="stylesheet" href="orb.css?v=16">
 </head>
 <body>
   <div class="grid-bg"></div>
@@ -24,7 +24,12 @@
         <p id="status" class="status-line"><span class="status-dot"></span><span id="statusText">connecting…</span></p>
       </div>
       <div class="hud-panel date-block">
-        <div id="hudClock" class="hud-clock big">--:--</div>
+        <div id="hudDay" class="hud-day">--</div>
+        <div>
+          <div id="hudMonth" class="hud-month">--</div>
+          <div id="hudWeekday" class="hud-weekday">--</div>
+          <div id="hudClock" class="hud-clock">--:--</div>
+        </div>
       </div>
     </header>
 
@@ -139,6 +144,6 @@
       </div>
     </aside>
   </main>
-  <script src="orb.js?v=15"></script>
+  <script src="orb.js?v=16"></script>
 </body>
 </html>
