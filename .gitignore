@@ -7,3 +7,6 @@ voice/venv/
 
 # Downloaded model weights (1.7 GB — whisper / piper / kokoro / mms)
 voice/models/
+
+# Secrets — the real API keys never enter git (copy api_keys.json.example)
+voice/api_keys.json

@@ -24,6 +24,21 @@ PIPER_DIR = Path(__file__).parent / "models" / "piper"
 # (MMS language models are chosen dynamically in languages.py)
 WEB_SEARCH = True                # enrich answers with DuckDuckGo when online
 
+# Cloud brain (optional) — voice/api_keys.json holds the Gemini key and is
+# gitignored so it can never leak into the repo. When the key is present and
+# Google is reachable, Gemini answers; any failure falls straight back to
+# local Ollama, so IRIS keeps talking with the internet down.
+# (Hybrid pattern from the deestudio028/jarvis reference project.)
+_keys = {}
+try:
+    _keys = json.loads((Path(__file__).parent / "api_keys.json").read_text("utf-8"))
+except Exception:
+    pass
+GEMINI_KEY = (_keys.get("gemini_api_key") or "").strip()
+GEMINI_MODEL = _keys.get("gemini_model", "gemini-flash-latest")
+LLM_PROVIDER = _keys.get("llm_provider", "auto" if GEMINI_KEY else "ollama")
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta"
+
 # English voices the user can pick in the UI's Voice tab. Tamil always uses
 # MMS (the only decent free offline Tamil voice). First existing file wins
 # as the default.
@@ -223,9 +238,17 @@ SMALLTALK = re.compile(
     r"^\s*(hi|hello|hey|bye|goodbye|thanks|thank you|ok(ay)?|yes|no|"
     r"வணக்கம்|நன்றி|சரி|ஆம்|இல்லை)\b[\s!,.?]*$", re.IGNORECASE)
 
+# Questions about the moving world always deserve a live search — even short
+# ones ("latest news") and ones phrased at the robot ("do you know today's...").
+FRESH_RE = re.compile(
+    r"\b(news|latest|today|tonight|current(ly)?|right now|weather|temperature|"
+    r"price|stock|score|match|election|release[ds]?|202\d|yesterday|"
+    r"this (week|month|year))\b", re.IGNORECASE)
+
 def web_search(query: str) -> str:
     """Top DuckDuckGo snippets, or '' if offline/failed/not worth searching."""
-    if not WEB_SEARCH or SMALLTALK.match(query) or len(query.split()) < 3:
+    if not WEB_SEARCH or SMALLTALK.match(query) or (
+            len(query.split()) < 3 and not FRESH_RE.search(query)):
         return ""
     try:
         from ddgs import DDGS
@@ -286,6 +309,62 @@ def llm_stream(history, lang, on_delta, search_context="", memories=""):
             "Web search results (use them if relevant, ignore if not):\n"
             + search_context + "\n\nUser said: " + messages[-1]["content"])
     messages[-1]["content"] += languages.instruction(lang)
+    # Cloud first, local fallback. If Gemini dies AFTER streaming words out,
+    # we must not restart on Ollama — the room already heard the beginning —
+    # so the fallback only fires when nothing was emitted yet.
+    emitted = [False]
+    def guarded(piece):
+        emitted[0] = True
+        on_delta(piece)
+    if GEMINI_KEY and LLM_PROVIDER in ("auto", "gemini"):
+        try:
+            out = _gemini_stream(messages, guarded)
+            if out:
+                return out
+        except Exception as e:
+            log("gemini failed, using ollama:", str(e)[:80])
+        if emitted[0]:
+            return ""
+    return _ollama_stream(messages, on_delta)
+
+
+def _gemini_stream(messages, on_delta):
+    system, contents = "", []
+    for m in messages:
+        if m["role"] == "system":
+            system = m["content"]
+        else:
+            contents.append({"role": "user" if m["role"] == "user" else "model",
+                             "parts": [{"text": m["content"]}]})
+    payload = {"contents": contents,
+               "generationConfig": {"maxOutputTokens": 400, "temperature": 0.6}}
+    if system:
+        payload["system_instruction"] = {"parts": [{"text": system}]}
+    req = urllib.request.Request(
+        f"{GEMINI_URL}/models/{GEMINI_MODEL}:streamGenerateContent?alt=sse",
+        data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json", "x-goog-api-key": GEMINI_KEY})
+    full = []
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        for raw in resp:
+            raw = raw.decode("utf-8", "ignore").strip()
+            if not raw.startswith("data:"):
+                continue
+            data = raw[5:].strip()
+            if data == "[DONE]":
+                break
+            try:
+                piece = "".join(p.get("text", "") for p in
+                                json.loads(data)["candidates"][0]["content"]["parts"])
+            except Exception:
+                continue
+            if piece:
+                full.append(piece)
+                on_delta(piece)
+    return "".join(full).strip()
+
+
+def _ollama_stream(messages, on_delta):
     payload = {
         "model": LLM_MODEL,
         "messages": messages,
@@ -405,8 +484,10 @@ async def handle(ws):
         # triple the reply time, and questions about the robot itself
         # ("who are you", "what can you do") gain nothing from the web.
         robot_directed = re.search(r"(you|your|yours)", user_text, re.IGNORECASE)
-        if (WEB_SEARCH and lang_hint == "en" and not robot_directed
-                and not SMALLTALK.match(user_text) and len(user_text.split()) >= 3):
+        fresh = bool(FRESH_RE.search(user_text))
+        if (WEB_SEARCH and lang_hint == "en" and
+                (fresh or (not robot_directed and not SMALLTALK.match(user_text)
+                           and len(user_text.split()) >= 3))):
             await send({"type": "status", "state": "thinking", "detail": "searching the web"})
             # Instant acknowledgment (Mark-LV pattern): a short spoken filler
             # covers the search delay so the room never gets dead air.
@@ -601,6 +682,10 @@ async def main():
     except Exception as e:
         log("WARNING: ollama not reachable:", e)
         log("start it, then: ollama pull", LLM_MODEL)
+    if GEMINI_KEY:
+        log(f"brain: {GEMINI_MODEL} (cloud) with {LLM_MODEL} fallback (local)")
+    else:
+        log(f"brain: {LLM_MODEL} (local only — add voice/api_keys.json for Gemini)")
     log(f"listening on ws://{HOST}:{PORT} - open http://127.0.0.1:8765/orb.html")
     async with websockets.serve(handle, HOST, PORT, max_size=32 * 1024 * 1024):
         await asyncio.Future()

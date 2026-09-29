@@ -126,6 +126,19 @@ def _volume(direction, steps=5):
     return {"up": "Volume up.", "down": "Volume down.", "mute": "Muted."}[direction]
 
 
+def _media(key, msg):
+    """One media key press: 179 play/pause, 176 next, 177 previous."""
+    _ps(f"$w=New-Object -ComObject WScript.Shell;$w.SendKeys([char]{key})")
+    return msg
+
+
+def _brightness(delta):
+    _ps("$b=(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightness).CurrentBrightness;"
+        f"$n=[Math]::Max(0,[Math]::Min(100,$b+({delta})));"
+        "(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1,$n)")
+    return "Brightness up." if delta > 0 else "Brightness down."
+
+
 APPS = {
     "notepad": "notepad.exe", "calculator": "calc.exe", "calculator app": "calc.exe",
     "chrome": "chrome.exe", "browser": "chrome.exe", "edge": "msedge.exe",
@@ -135,9 +148,36 @@ APPS = {
     "task manager": "taskmgr.exe", "calendar": "outlookcal:",
 }
 
+SITES = {
+    "youtube": "https://www.youtube.com", "google": "https://www.google.com",
+    "gmail": "https://mail.google.com", "email": "https://mail.google.com",
+    "github": "https://github.com", "wikipedia": "https://www.wikipedia.org",
+    "maps": "https://www.google.com/maps", "google maps": "https://www.google.com/maps",
+    "whatsapp": "https://web.whatsapp.com", "instagram": "https://www.instagram.com",
+    "spotify": "https://open.spotify.com",
+    "news": "https://news.google.com", "the news": "https://news.google.com",
+}
+
+# Apps IRIS may force-close by name. Never explorer or the task manager —
+# killing those takes the desktop down with them.
+CLOSABLE = {
+    "notepad": "notepad.exe", "calculator": "CalculatorApp.exe",
+    "chrome": "chrome.exe", "browser": "chrome.exe", "edge": "msedge.exe",
+    "paint": "mspaint.exe", "camera": "WindowsCamera.exe",
+}
+
 
 def _open_app(name):
     name = name.lower().strip(" .?!")
+    url = SITES.get(name)
+    if not url:
+        for k, v in SITES.items():
+            if k in name:
+                url, name = v, k
+                break
+    if url:
+        _run(["cmd", "/c", "start", "", url])
+        return f"Opening {name}."
     exe = APPS.get(name)
     if not exe:
         for k, v in APPS.items():
@@ -146,11 +186,101 @@ def _open_app(name):
                 break
     if not exe:
         return f"I do not know how to open {name}."
-    if exe.endswith(":"):
-        _run(["cmd", "/c", "start", "", exe])
-    else:
-        _run(["cmd", "/c", "start", "", exe])
+    _run(["cmd", "/c", "start", "", exe])
     return f"Opening {name}."
+
+
+def _close_app(name):
+    name = name.lower().strip(" .?!")
+    exe = CLOSABLE.get(name)
+    if not exe:
+        for k, v in CLOSABLE.items():
+            if k in name:
+                exe, name = v, k
+                break
+    if not exe:
+        return f"I can only close apps from my own list, and {name} is not on it."
+    _run(["taskkill", "/IM", exe, "/F"])
+    return f"Closing {name}."
+
+
+def _web(url, msg):
+    _run(["cmd", "/c", "start", "", url])
+    return msg
+
+
+def _search_web(q):
+    from urllib.parse import quote_plus
+    q = q.strip(" .?!")
+    return _web("https://www.google.com/search?q=" + quote_plus(q), f"Searching for {q}.")
+
+
+def _youtube(q):
+    from urllib.parse import quote_plus
+    q = q.strip(" .?!")
+    return _web("https://www.youtube.com/results?search_query=" + quote_plus(q),
+                f"Looking for {q} on YouTube.")
+
+
+def _type_text(text):
+    # SendKeys treats +^%~(){}[] as commands — wrap them, then double the
+    # quotes so the text survives the PowerShell single-quoted string.
+    esc = "".join("{%s}" % c if c in "+^%~(){}[]" else c for c in text)
+    esc = esc.replace("'", "''")
+    _ps("Add-Type -AssemblyName System.Windows.Forms;"
+        f"[System.Windows.Forms.SendKeys]::SendWait('{esc}')")
+    return "Typing."
+
+
+def _minimize_all():
+    _ps("(New-Object -ComObject Shell.Application).MinimizeAll()")
+    return "Minimizing everything."
+
+
+def _close_window():
+    _ps("Add-Type -AssemblyName System.Windows.Forms;"
+        "[System.Windows.Forms.SendKeys]::SendWait('%{F4}')")
+    return "Closing the window."
+
+
+def _sleep_pc():
+    _run(["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"])
+    return "Going to sleep. Wake me when you need me."
+
+
+def _power(mode):
+    """Shutdown and restart get a 30 s grace period and a spoken way out,
+    so one misheard word can never pull the plug instantly."""
+    if mode == "cancel":
+        _run(["shutdown", "/a"])
+        return "Cancelled. Staying on."
+    _run(["shutdown", "/s" if mode == "off" else "/r", "/t", "30"])
+    verb = "Shutting down" if mode == "off" else "Restarting"
+    return f"{verb} in thirty seconds. Say cancel shutdown if you change your mind."
+
+
+def _disk_space():
+    import shutil
+    parts = []
+    for d in ("C:\\", "U:\\"):
+        try:
+            u = shutil.disk_usage(d)
+            parts.append(f"{d[0]} drive has {u.free / 1e9:.0f} gigabytes free of {u.total / 1e9:.0f}")
+        except Exception:
+            pass
+    return ("; ".join(parts) + ".") if parts else "I could not read the disks."
+
+
+def _my_ip():
+    import socket
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return f"My local IP address is {ip}."
+    except Exception:
+        return "I could not read the network address."
 
 
 def _screenshot():
@@ -246,13 +376,35 @@ INTENTS = [
      lambda m: _status_report(), False),
 
     # --- laptop ---
+    (r"\bplay (.+?) on youtube\b", lambda m: _youtube(m.group(1)), False),
+    (r"\b(?:search(?: the web)?(?: for)?|google) (.+)$", lambda m: _search_web(m.group(1)), False),
+    (r"^type (.+)$", lambda m: _type_text(m.group(1)), False),
     (r"\bopen (?:the )?(.+?)(?: app| program)?\s*$", lambda m: _open_app(m.group(1)), False),
+    (r"\bclose (?:(?:this|that|the)(?: current)? )?window\b", lambda m: _close_window(), False),
+    (r"\bclose (?:the )?(.+?)(?: app| program)?\s*$", lambda m: _close_app(m.group(1)), False),
+    (r"\b(pause|stop the (music|song|video)|play the (music|song|video)|play music|resume the (music|song))\b",
+     lambda m: _media(179, "Done."), False),
+    (r"\b(next (song|track)|skip (this )?(song|track))\b", lambda m: _media(176, "Next track."), False),
+    (r"\b(previous (song|track)|last song|go back a (song|track))\b",
+     lambda m: _media(177, "Previous track."), False),
     (r"\b(volume up|louder|turn it up|சத்தம்\s*அதிகரி)\b", lambda m: _volume("up"), False),
     (r"\b(volume down|quieter|turn it down|சத்தம்\s*குறை)\b", lambda m: _volume("down"), False),
     (r"\b(mute|unmute|silence)\b", lambda m: _volume("mute"), False),
+    (r"\b(brightness up|brighter|increase (the )?brightness)\b", lambda m: _brightness(20), False),
+    (r"\b(brightness down|dimmer|reduce (the )?brightness|decrease (the )?brightness)\b",
+     lambda m: _brightness(-20), False),
+    (r"\b(minimize (everything|all( (the )?windows)?)|show (me )?(the )?desktop)\b",
+     lambda m: _minimize_all(), False),
     (r"\b(take a )?screenshot\b", lambda m: _screenshot(), False),
     (r"\b(lock (the )?(screen|laptop|computer))\b",
      lambda m: (_run(["rundll32.exe", "user32.dll,LockWorkStation"]), "Locking the screen.")[1], False),
+    (r"\b(go to sleep|sleep now|sleep (the )?(laptop|computer|pc))\b",
+     lambda m: _sleep_pc(), False),
+    (r"\bcancel (the )?(shutdown|restart)\b", lambda m: _power("cancel"), False),
+    (r"\bshut ?down\b", lambda m: _power("off"), False),
+    (r"\brestart (the )?(laptop|computer|pc)\b", lambda m: _power("restart"), False),
+    (r"\b(disk space|free space|storage (left|space))\b", lambda m: _disk_space(), False),
+    (r"\b(ip address|my ip)\b", lambda m: _my_ip(), False),
     (r"\b(battery|charge level|பேட்டரி)\b", lambda m: _battery(), False),
     (r"\bwhat(?:'s| is)? the time|what time is it|நேரம்\s*என்ன\b",
      lambda m: "It is " + time.strftime("%I:%M %p").lstrip("0") + ".", False),
@@ -287,8 +439,15 @@ def describe():
         "robot": ["look around", "look left / right / up / down", "look at me",
                   "blink", "smile", "look sad", "look surprised", "neutral",
                   "stop moving"],
-        "laptop": ["open notepad / chrome / calculator / explorer / camera",
-                   "volume up / down", "mute", "screenshot", "lock the screen",
-                   "run diagnostics", "status report", "battery", "what time is it", "what is the date"],
+        "laptop": ["open notepad / chrome / youtube / gmail / whatsapp / news",
+                   "search for <anything>", "play <song> on youtube",
+                   "type <text>", "pause / next song / previous song",
+                   "volume up / down / mute", "brightness up / down",
+                   "screenshot", "minimize everything", "close chrome / notepad",
+                   "lock the screen", "go to sleep",
+                   "shutdown / restart the laptop / cancel shutdown",
+                   "disk space", "battery", "my ip",
+                   "run diagnostics", "status report",
+                   "what time is it", "what is the date"],
         "motion_enabled": robot.available,
     }
