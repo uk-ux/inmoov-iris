@@ -1,0 +1,74 @@
+logging to U:\inmoov\voice\test_logs\run-133336.jsonl
+  c1 en sim=1.0 stt=0.39s llm=4.33s 1st_audio=3.3s total=5.75s | Hello, who are you?
+  c1 en sim=1.0 stt=0.45s llm=4.81s 1st_audio=5.14s total=6.3s | What is your name?
+  c1 en sim=1.0 stt=0.46s llm=5.98s 1st_audio=6.51s total=7.91s | Can you move your eyes?
+  c1 en sim=1.0 stt=0.47s llm=5.89s 1st_audio=6.28s total=8.61s | Tell me something interesting 
+  c1 en sim=1.0 stt=0.56s llm=4.64s 1st_audio=5.72s total=6.28s | How are you feeling today?
+  c1 en sim=1.0 stt=0.45s llm=7.76s 1st_audio=8.19s total=9.92s | What can you do?
+  c1 en sim=1.0 stt=0.5s llm=4.2s 1st_audio=4.21s total=6.12s | Do you like music?
+  c1 en sim=1.0 stt=0.48s llm=7.12s 1st_audio=7.63s total=8.82s | Where do you live?
+U:\inmoov\voice\venv\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/762 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 168/762 [00:00<00:00, 1678.30it/s]Loading weights: 100%|██████████| 762/762 [00:00<00:00, 6911.95it/s]
+  c1 ta sim=0.974 stt=0.47s llm=8.6s 1st_audio=1.7s total=9.72s | வணக்கம், நீங்கள் யார்?
+  c1 ta sim=0.909 stt=0.29s llm=5.84s 1st_audio=2.29s total=6.76s | உங்கள் பெயர் என்ன?
+  c1 ta sim=1.0 stt=0.29s llm=6.92s 1st_audio=6.18s total=7.8s | நீங்கள் என்ன செய்ய முடியும்?
+  c1 ta sim=1.0 stt=0.29s llm=5.98s 1st_audio=4.87s total=6.77s | இன்று எப்படி இருக்கிறீர்கள்?
+Loading weights:   0%|          | 0/762 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 102/762 [00:00<00:00, 968.51it/s]Loading weights: 100%|██████████| 762/762 [00:00<00:00, 5867.13it/s]
+  c1 te sim=0.111 stt=0.52s llm=4.64s 1st_audio=2.99s total=5.66s | నమస్కారం, మీరు ఎవరు?
+  c1 te sim=0.066 stt=0.23s llm=5.49s 1st_audio=3.66s total=6.25s | మీ పేరు ఏమిటి?
+  c1 te sim=0.091 stt=0.25s llm=5.75s 1st_audio=3.93s total=6.52s | మీరు ఏమి చేయగలరు?
+Loading weights:   0%|          | 0/762 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 98/762 [00:00<00:00, 961.27it/s]Loading weights: 100%|██████████| 762/762 [00:00<00:00, 6544.41it/s]
+  c1 hi sim=1.0 stt=0.39s llm=5.27s 1st_audio=2.46s total=6.06s | नमस्ते, आप कौन हैं?
+  c1 hi sim=0.818 stt=0.25s llm=4.25s 1st_audio=3.35s total=4.95s | आपका नाम क्या है?
+  c2 en sim=1.0 stt=0.47s llm=4.99s 1st_audio=4.89s total=6.61s | Hello, who are you?
+  c2 en sim=1.0 stt=0.36s llm=4.45s 1st_audio=4.57s total=5.91s | What is your name?
+  c2 en sim=1.0 stt=0.39s llm=7.09s 1st_audio=7.57s total=9.18s | Can you move your eyes?
+  c2 en sim=1.0 stt=0.55s llm=9.65s 1st_audio=11.02s total=13.67s | Tell me something interesting 
+  c2 en sim=1.0 stt=0.68s llm=4.27s 1st_audio=5.4s total=5.96s | How are you feeling today?
+  c2 en sim=1.0 stt=0.44s llm=6.22s 1st_audio=6.66s total=8.07s | What can you do?
+  c2 en sim=1.0 stt=0.46s llm=7.4s 1st_audio=7.37s total=9.02s | Do you like music?
+  c2 en sim=1.0 stt=0.45s llm=6.18s 1st_audio=6.53s total=8.34s | Where do you live?
+  c2 ta sim=1.0 stt=0.34s llm=7.45s 1st_audio=2.23s total=8.38s | வணக்கம், நீங்கள் யார்?
+  c2 ta sim=0.909 stt=0.3s llm=4.89s 1st_audio=3.05s total=5.97s | உங்கள் பெயர் என்ன?
+  c2 ta sim=1.0 stt=0.38s llm=11.99s 1st_audio=12.12s total=12.99s | நீங்கள் என்ன செய்ய முடியும்?
+  c2 ta sim=0.926 stt=0.66s llm=12.52s 1st_audio=15.23s total=15.23s | இன்று எப்படி இருக்கிறீர்கள்?
+  c2 te sim=0.118 stt=0.25s llm=5.04s 1st_audio=3.12s total=5.93s | నమస్కారం, మీరు ఎవరు?
+  c2 te sim=0.098 stt=0.23s llm=7.09s 1st_audio=3.33s total=7.99s | మీ పేరు ఏమిటి?
+  c2 te sim=0.108 stt=0.42s llm=8.93s 1st_audio=5.76s total=10.02s | మీరు ఏమి చేయగలరు?
+  c2 hi sim=1.0 stt=0.32s llm=6.07s 1st_audio=2.83s total=6.96s | नमस्ते, आप कौन हैं?
+  c2 hi sim=0.783 stt=0.3s llm=4.96s 1st_audio=3.75s total=6.0s | आपका नाम क्या है?
+  c3 en sim=1.0 stt=0.49s llm=7.09s 1st_audio=6.07s total=9.29s | Hello, who are you?
+  c3 en sim=1.0 stt=0.59s llm=7.7s 1st_audio=8.18s total=9.66s | What is your name?
+  c3 en sim=1.0 stt=0.54s llm=7.82s 1st_audio=8.56s total=11.82s | Can you move your eyes?
+  c3 en sim=1.0 stt=0.47s llm=6.73s 1st_audio=7.63s total=9.99s | Tell me something interesting 
+  c3 en sim=1.0 stt=0.66s llm=6.61s 1st_audio=7.91s total=8.58s | How are you feeling today?
+  c3 en sim=1.0 stt=0.34s llm=4.77s 1st_audio=5.46s total=9.39s | What can you do?
+  c3 en sim=1.0 stt=0.42s llm=5.84s 1st_audio=6.02s total=7.64s | Do you like music?
+  c3 en sim=1.0 stt=0.49s llm=5.5s 1st_audio=6.74s total=8.52s | Where do you live?
+  c3 ta sim=1.0 stt=0.31s llm=7.8s 1st_audio=2.34s total=8.74s | வணக்கம், நீங்கள் யார்?
+  c3 ta sim=0.909 stt=0.52s llm=6.69s 1st_audio=5.39s total=8.07s | உங்கள் பெயர் என்ன?
+  c3 ta sim=1.0 stt=0.34s llm=8.09s 1st_audio=6.74s total=9.12s | நீங்கள் என்ன செய்ய முடியும்?
+  c3 ta sim=0.857 stt=0.33s llm=6.06s 1st_audio=4.61s total=7.44s | இன்று எப்படி இருக்கிறீர்கள்?
+  c3 te sim=0.118 stt=0.53s llm=7.56s 1st_audio=6.1s total=8.76s | నమస్కారం, మీరు ఎవరు?
+  c3 te sim=0.0 stt=2.08s llm=7.15s 1st_audio=4.88s total=9.94s | మీ పేరు ఏమిటి?
+  c3 te sim=0.091 stt=0.47s llm=9.24s 1st_audio=5.42s total=10.47s | మీరు ఏమి చేయగలరు?
+  c3 hi sim=1.0 stt=0.58s llm=8.12s 1st_audio=4.96s total=9.55s | नमस्ते, आप कौन हैं?
+  c3 hi sim=0.818 stt=0.25s llm=5.34s 1st_audio=3.62s total=6.26s | आपका नाम क्या है?
+  c4 en sim=1.0 stt=0.44s llm=6.18s 1st_audio=5.04s total=8.05s | Hello, who are you?
+  c4 en sim=1.0 stt=0.47s llm=4.8s 1st_audio=5.02s total=6.49s | What is your name?
+  c4 en sim=1.0 stt=0.51s llm=6.75s 1st_audio=6.81s total=8.95s | Can you move your eyes?
+  c4 en sim=1.0 stt=0.56s llm=7.34s 1st_audio=8.48s total=10.64s | Tell me something interesting 
+  c4 en sim=1.0 stt=0.62s llm=8.0s 1st_audio=7.86s total=10.15s | How are you feeling today?
+  c4 en sim=1.0 stt=0.53s llm=6.62s 1st_audio=7.12s total=8.82s | What can you do?
+  c4 en sim=1.0 stt=0.52s llm=5.58s 1st_audio=5.14s total=7.94s | Do you like music?
+  c4 en sim=1.0 stt=0.48s llm=13.0s 1st_audio=13.8s total=16.28s | Where do you live?
+  c4 ta sim=1.0 stt=0.27s llm=5.69s 1st_audio=2.12s total=6.63s | வணக்கம், நீங்கள் யார்?
+  c4 ta sim=0.909 stt=0.26s llm=4.95s 1st_audio=2.9s total=5.87s | உங்கள் பெயர் என்ன?
+  c4 ta sim=1.0 stt=0.28s llm=10.73s 1st_audio=9.46s total=11.85s | நீங்கள் என்ன செய்ய முடியும்?
+  c4 ta sim=0.926 stt=0.3s llm=8.19s 1st_audio=6.96s total=9.17s | இன்று எப்படி இருக்கிறீர்கள்?
+  c4 te sim=0.118 stt=0.25s llm=8.87s 1st_audio=4.56s total=9.95s | నమస్కారం, మీరు ఎవరు?
+  c4 te sim=0.182 stt=0.79s llm=12.17s 1st_audio=10.39s total=13.83s | మీ పేరు ఏమిటి?
+  c4 te sim=0.108 stt=0.22s llm=7.38s 1st_audio=4.03s total=9.04s | మీరు ఏమి చేయగలరు?
+SUMMARY {"runs": 66, "errors": 0, "stt_sim_en": 1.0, "stt_sim_ta": 0.96, "stt_sim_te": 0.1, "stt_sim_hi": 0.9, "lang_detect_ok": 0.985, "reply_lang_ok": 0.97, "avg_t_stt": 0.45, "avg_t_llm": 6.83, "avg_t_first_audio": 5.82, "avg_t_total": 8.54, "minutes": 10.0}

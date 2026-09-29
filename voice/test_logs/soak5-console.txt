@@ -1,0 +1,30 @@
+logging to U:\inmoov\voice\test_logs\run-012003.jsonl
+  c1 en sim=1.0 stt=2.7s llm=4.24s tts=0.47s | Hello, who are you?
+  c1 en sim=1.0 stt=3.07s llm=3.99s tts=0.46s | What is your name?
+  c1 en sim=1.0 stt=3.11s llm=2.9s tts=0.88s | Can you move your eyes?
+  c1 en sim=1.0 stt=3.27s llm=4.28s tts=1.57s | Tell me something interesting abou
+  c1 en sim=1.0 stt=2.77s llm=3.55s tts=0.35s | How are you feeling today?
+  c1 en sim=1.0 stt=3.06s llm=3.81s tts=1.14s | What can you do?
+  c1 en sim=1.0 stt=3.06s llm=3.3s tts=0.59s | Do you like music?
+  c1 en sim=1.0 stt=4.06s llm=3.7s tts=0.78s | Where do you live?
+U:\inmoov\voice\venv\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/762 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 218/762 [00:00<00:00, 2178.27it/s]Loading weights: 100%|██████████| 762/762 [00:00<00:00, 6122.00it/s]
+  c1 ta sim=1.0 stt=3.01s llm=13.25s tts=2.34s | வணக்கம், நீங்கள் யார்?
+  c1 ta sim=1.0 stt=4.75s llm=10.07s tts=2.87s | உங்கள் பெயர் என்ன?
+  c1 ta sim=1.0 stt=3.24s llm=9.38s tts=2.39s | நீங்கள் என்ன செய்ய முடியும்?
+  c1 ta sim=0.857 stt=3.48s llm=9.22s tts=1.97s | இன்று எப்படி இருக்கிறீர்கள்?
+  c1 ta sim=1.0 stt=3.4s llm=10.27s tts=3.88s | எனக்கு ஒரு விஷயம் சொல்லுங்கள்.
+  c1 ta sim=1.0 stt=4.95s llm=14.3s tts=5.17s | உங்களுக்கு தமிழ் தெரியுமா?
+  c2 en sim=1.0 stt=4.68s llm=6.43s tts=1.79s | Hello, who are you?
+  c2 en sim=1.0 stt=4.13s llm=6.81s tts=0.7s | What is your name?
+  c2 en sim=1.0 stt=3.0s llm=6.9s tts=1.27s | Can you move your eyes?
+  c2 en sim=1.0 stt=4.82s llm=8.58s tts=2.22s | Tell me something interesting abou
+  c2 en sim=1.0 stt=5.2s llm=4.16s tts=0.78s | How are you feeling today?
+  c2 en sim=1.0 stt=5.12s llm=5.63s tts=1.39s | What can you do?
+  c2 en sim=1.0 stt=4.03s llm=4.34s tts=1.2s | Do you like music?
+  c2 en sim=1.0 stt=3.61s llm=4.17s tts=0.87s | Where do you live?
+  c2 ta sim=1.0 stt=3.46s llm=7.68s tts=1.27s | வணக்கம், நீங்கள் யார்?
+  c2 ta sim=1.0 stt=3.36s llm=9.48s tts=2.08s | உங்கள் பெயர் என்ன?
+SUMMARY {"runs": 24, "errors": 0, "stt_sim_en": 1.0, "stt_sim_ta": 0.98, "lang_detect_ok": 1.0, "reply_lang_ok": 1.0, "avg_t_stt": 3.72, "avg_t_llm": 6.68, "avg_t_tts": 1.6, "avg_t_total": 12.01, "minutes": 5.1}

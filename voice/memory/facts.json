@@ -1,0 +1,68 @@
+[
+ {
+  "text": "The user's name is Udhaya and the user is building a robot head",
+  "source": "told",
+  "seen": 1,
+  "at": "2026-09-29 12:30"
+ },
+ {
+  "text": "User likes filter coffee",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "Udhaya",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "Building a robot head",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "Your companion is InMoov",
+  "source": "learned",
+  "seen": 2,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "You like filter coffee",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "Udaya",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 12:31"
+ },
+ {
+  "text": "InMoov",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 13:40"
+ },
+ {
+  "text": "User's name is InMoov",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 13:40"
+ },
+ {
+  "text": "User is a robot head that looks like a human",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 13:40"
+ },
+ {
+  "text": "User introduced themselves as InMoov",
+  "source": "learned",
+  "seen": 1,
+  "at": "2026-09-29 13:40"
+ }
+]

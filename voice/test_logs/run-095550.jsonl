@@ -1,0 +1,14 @@
+{"phrase": "Hello, who are you?", "lang": "en", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "What is your name?", "lang": "en", "error": "cannot access local variable 't_user' where it is not associated with a value", "cycle": 1}
+{"phrase": "Can you move your eyes?", "lang": "en", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "Tell me something interesting about robots.", "lang": "en", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "How are you feeling today?", "lang": "en", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "What can you do?", "lang": "en", "error": "cannot access local variable 't_user' where it is not associated with a value", "cycle": 1}
+{"phrase": "Do you like music?", "lang": "en", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "Where do you live?", "lang": "en", "audio_s": 1.04, "t_stt": 0.22, "stt_lang": "en", "t_llm": 4.67, "t_tts": 0.28, "audio_bytes": 238636, "heard": "Can you move your eyes?", "reply": "Yes, I can move my eyes and even move one eye at a time, though it's a skill that requires practice. It's similar to what some people can do, allowing for greater control over my gaze.", "stt_sim": 0.359, "lang_ok": true, "reply_lang_ok": true, "t_total": 5.17, "cycle": 1}
+{"phrase": "வணக்கம், நீங்கள் யார்?", "lang": "ta", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "உங்கள் பெயர் என்ன?", "lang": "ta", "audio_s": 1.71, "t_stt": 0.0, "stt_lang": "en", "t_llm": 0.0, "t_tts": 0.0, "audio_bytes": 281644, "heard": "Tell me something interesting about robots.", "reply": "Robots are increasingly used in factories for speed and consistency, and in hospitals for precise tasks. Interestingly, South Korea leads in robot density with 531 robots for every 10,000 people in manufacturing.", "stt_sim": 0.068, "lang_ok": false, "reply_lang_ok": false, "t_total": 0.0, "cycle": 1}
+{"phrase": "நீங்கள் என்ன செய்ய முடியும்?", "lang": "ta", "error": "cannot access local variable 't_reply' where it is not associated with a value", "cycle": 1}
+{"phrase": "இன்று எப்படி இருக்கிறீர்கள்?", "lang": "ta", "error": "sent 1011 (internal error) keepalive ping timeout; no close frame received", "cycle": 1}
+{"phrase": "எனக்கு ஒரு விஷயம் சொல்லுங்கள்.", "lang": "ta", "error": "sent 1011 (internal error) keepalive ping timeout; no close frame received", "cycle": 1}
+{"phrase": "உங்களுக்கு தமிழ் தெரியுமா?", "lang": "ta", "error": "sent 1011 (internal error) keepalive ping timeout; no close frame received", "cycle": 1}

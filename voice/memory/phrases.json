@@ -1,0 +1,476 @@
+{
+ "remember that my name is udhaya and i am building a robot head.": {
+  "text": "Remember that my name is Udhaya and I am building a robot head.",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 12:30"
+ },
+ "i really like filter coffee.": {
+  "text": "I really like filter coffee.",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 12:30"
+ },
+ "what is my name?": {
+  "text": "What is my name?",
+  "lang": "en",
+  "count": 3,
+  "at": "2026-09-29 12:31"
+ },
+ "what do you know about me?": {
+  "text": "What do you know about me?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 12:29"
+ },
+ "what do i like to drink?": {
+  "text": "What do I like to drink?",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 12:31"
+ },
+ "என் பெயர் என்ன?": {
+  "text": "என் பெயர் என்ன?",
+  "lang": "ta",
+  "count": 2,
+  "at": "2026-09-29 12:31"
+ },
+ "hello, who are you?": {
+  "text": "Hello, who are you?",
+  "lang": "en",
+  "count": 12,
+  "at": "2026-09-29 13:41"
+ },
+ "what is your name?": {
+  "text": "What is your name?",
+  "lang": "en",
+  "count": 11,
+  "at": "2026-09-29 13:49"
+ },
+ "can you move your eyes?": {
+  "text": "Can you move your eyes?",
+  "lang": "en",
+  "count": 10,
+  "at": "2026-09-29 13:41"
+ },
+ "tell me something interesting about robots.": {
+  "text": "Tell me something interesting about robots.",
+  "lang": "en",
+  "count": 10,
+  "at": "2026-09-29 13:41"
+ },
+ "how are you feeling today?": {
+  "text": "How are you feeling today?",
+  "lang": "en",
+  "count": 10,
+  "at": "2026-09-29 13:41"
+ },
+ "what can you do?": {
+  "text": "What can you do?",
+  "lang": "en",
+  "count": 11,
+  "at": "2026-09-29 15:56"
+ },
+ "do you like music?": {
+  "text": "Do you like music?",
+  "lang": "en",
+  "count": 9,
+  "at": "2026-09-29 13:42"
+ },
+ "where do you live?": {
+  "text": "Where do you live?",
+  "lang": "en",
+  "count": 9,
+  "at": "2026-09-29 13:42"
+ },
+ "வணக்கம் நீங்கள் யார்?": {
+  "text": "வணக்கம் நீங்கள் யார்?",
+  "lang": "ta",
+  "count": 8,
+  "at": "2026-09-29 13:42"
+ },
+ "உங்கள் பேர் என்ன?": {
+  "text": "உங்கள் பேர் என்ன?",
+  "lang": "ta",
+  "count": 8,
+  "at": "2026-09-29 13:42"
+ },
+ "நீங்கள் என்ன செய்ய முடியும்?": {
+  "text": "நீங்கள் என்ன செய்ய முடியும்?",
+  "lang": "ta",
+  "count": 8,
+  "at": "2026-09-29 13:40"
+ },
+ "இன்று எப்படி இருக்கிறீர்கள்?": {
+  "text": "இன்று எப்படி இருக்கிறீர்கள்?",
+  "lang": "ta",
+  "count": 4,
+  "at": "2026-09-29 13:35"
+ },
+ "எனக்கு ஒரு விஷயம் சொல்லுங்கள்.": {
+  "text": "எனக்கு ஒரு விஷயம் சொல்லுங்கள்.",
+  "lang": "ta",
+  "count": 5,
+  "at": "2026-09-29 13:02"
+ },
+ "உங்களுக்கு தமிழ் தெரியுமா?": {
+  "text": "உங்களுக்கு தமிழ் தெரியுமா?",
+  "lang": "ta",
+  "count": 4,
+  "at": "2026-09-29 13:02"
+ },
+ "what time is it": {
+  "text": "what time is it",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 12:52"
+ },
+ "look around": {
+  "text": "look around",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 12:52"
+ },
+ "volume up": {
+  "text": "volume up",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 12:53"
+ },
+ "battery": {
+  "text": "battery",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 12:53"
+ },
+ "இந்து எப்படி இருக்கிறீர்கள்?": {
+  "text": "இந்து எப்படி இருக்கிறீர்கள்?",
+  "lang": "ta",
+  "count": 3,
+  "at": "2026-09-29 13:42"
+ },
+ "உங்கள் பெயர் என்ன?": {
+  "text": "உங்கள் பெயர் என்ன?",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 12:59"
+ },
+ "இங்கு எப்படி இருக்கிறீர்கள்?": {
+  "text": "இங்கு எப்படி இருக்கிறீர்கள்?",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:00"
+ },
+ "உங்களுக்கு தமிழ் தெரியுமா.": {
+  "text": "உங்களுக்கு தமிழ் தெரியுமா.",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:00"
+ },
+ "inmoov": {
+  "text": "InMoov",
+  "lang": "en",
+  "count": 4,
+  "at": "2026-09-29 18:31"
+ },
+ "it may be a robot like paniyam.": {
+  "text": "It may be a robot like Paniyam.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:10"
+ },
+ "i want to learn something here.": {
+  "text": "I want to learn something here.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:10"
+ },
+ "help god on.": {
+  "text": "Help God on.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:11"
+ },
+ "one browser is fixed.": {
+  "text": "One browser is fixed.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:11"
+ },
+ "thank you.": {
+  "text": "Thank you.",
+  "lang": "en",
+  "count": 9,
+  "at": "2026-09-29 15:43"
+ },
+ "all is to create you.": {
+  "text": "All is to create you.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:13"
+ },
+ "thank you so much.": {
+  "text": "Thank you so much.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:13"
+ },
+ "it's a joke.": {
+  "text": "It's a joke.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:14"
+ },
+ "నమస్కారం, మీరు ఎవరు?": {
+  "text": "నమస్కారం, మీరు ఎవరు?",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 13:31"
+ },
+ "नमस्ते, आप कौन हैं?": {
+  "text": "नमस्ते, आप कौन हैं?",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 13:31"
+ },
+ "வணக்கம், நீங்கள் யார்?": {
+  "text": "வணக்கம், நீங்கள் யார்?",
+  "lang": "ta",
+  "count": 2,
+  "at": "2026-09-29 13:31"
+ },
+ "வணக்கம் நீங்கள் யார?": {
+  "text": "வணக்கம் நீங்கள் யார?",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:34"
+ },
+ "namaskaravam méru yawaru.": {
+  "text": "Namaskaravam méru yawaru.",
+  "lang": "te",
+  "count": 1,
+  "at": "2026-09-29 13:35"
+ },
+ "inmoov a conversation with inmoov a conversation with": {
+  "text": "InMoov A conversation with InMoov A conversation with",
+  "lang": "te",
+  "count": 2,
+  "at": "2026-09-29 13:43"
+ },
+ "inmoov a conversation with inmoov": {
+  "text": "InMoov A conversation with InMoov",
+  "lang": "te",
+  "count": 5,
+  "at": "2026-09-29 13:44"
+ },
+ "नमस्ते आप कुन है?": {
+  "text": "नमस्ते आप कुन है?",
+  "lang": "hi",
+  "count": 2,
+  "at": "2026-09-29 13:40"
+ },
+ "अप कनाम क्या है?": {
+  "text": "अप कनाम क्या है?",
+  "lang": "hi",
+  "count": 2,
+  "at": "2026-09-29 13:41"
+ },
+ "hey, what you having me in?": {
+  "text": "Hey, what you having me in?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:37"
+ },
+ "namaskaram. mere yawalu.": {
+  "text": "Namaskaram. Mere yawalu.",
+  "lang": "te",
+  "count": 1,
+  "at": "2026-09-29 13:37"
+ },
+ "inmoov a conversation with": {
+  "text": "InMoov A conversation with",
+  "lang": "te",
+  "count": 2,
+  "at": "2026-09-29 13:43"
+ },
+ "नमस्ते आप कोन है?": {
+  "text": "नमस्ते आप कोन है?",
+  "lang": "hi",
+  "count": 1,
+  "at": "2026-09-29 13:38"
+ },
+ "अग का नाम क्या है?": {
+  "text": "अग का नाम क्या है?",
+  "lang": "hi",
+  "count": 1,
+  "at": "2026-09-29 13:38"
+ },
+ "runs magnuses.": {
+  "text": "Runs Magnuses.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:38"
+ },
+ "what does it mean by wanting?": {
+  "text": "What does it mean by wanting?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:39"
+ },
+ "speak in tamil": {
+  "text": "speak in tamil",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:39"
+ },
+ "இந்தில் எப்படி இருக்கிறீர்கள்?": {
+  "text": "இந்தில் எப்படி இருக்கிறீர்கள்?",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:40"
+ },
+ "sonas que tienen peligro.": {
+  "text": "Sonas que tienen peligro.",
+  "lang": "es",
+  "count": 1,
+  "at": "2026-09-29 13:40"
+ },
+ "namaskaram méru yawalu.": {
+  "text": "Namaskaram méru yawalu.",
+  "lang": "te",
+  "count": 1,
+  "at": "2026-09-29 13:40"
+ },
+ "and speaking tamil, say it on some tamil roots.": {
+  "text": "And speaking Tamil, say it on some Tamil roots.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:40"
+ },
+ "நீங்கள் என்ன செய்ய முடியும்": {
+  "text": "நீங்கள் என்ன செய்ய முடியும்",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:42"
+ },
+ "namaskaram méru yawaru.": {
+  "text": "Namaskaram méru yawaru.",
+  "lang": "te",
+  "count": 1,
+  "at": "2026-09-29 13:43"
+ },
+ "நீ பேரு நிமிடி.": {
+  "text": "நீ பேரு நிமிடி.",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:43"
+ },
+ "thank you very much.": {
+  "text": "Thank you very much.",
+  "lang": "en",
+  "count": 3,
+  "at": "2026-09-29 15:42"
+ },
+ "¡pamá!": {
+  "text": "¡Pamá!",
+  "lang": "es",
+  "count": 1,
+  "at": "2026-09-29 13:46"
+ },
+ "நான் கூறுகிறேன்.": {
+  "text": "நான் கூறுகிறேன்.",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 13:48"
+ },
+ "yeah.": {
+  "text": "Yeah.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:48"
+ },
+ "thank you for watching.": {
+  "text": "Thank you for watching.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:48"
+ },
+ "hey, ladies! can i speak in tamil? still something in tamil?": {
+  "text": "Hey, ladies! Can I speak in Tamil? Still something in Tamil?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:56"
+ },
+ "hey, can you speak taintable? there's something in tower.": {
+  "text": "Hey, can you speak taintable? There's something in tower.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:57"
+ },
+ "soft deal.": {
+  "text": "Soft deal.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 13:57"
+ },
+ "inmoovvvv inmoovvvv": {
+  "text": "InMoovvvv InMoovvvv",
+  "lang": "ml",
+  "count": 1,
+  "at": "2026-09-29 13:59"
+ },
+ "inmoovvvvvvvv": {
+  "text": "InMoovvvvvvvv",
+  "lang": "tl",
+  "count": 1,
+  "at": "2026-09-29 14:00"
+ },
+ "எல்லாம் சரும்மும் வருகிறது? எல்லாம் சரும்மும் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது?": {
+  "text": "எல்லாம் சரும்மும் வருகிறது? எல்லாம் சரும்மும் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது? எல்லாம் வருகிறது?",
+  "lang": "ta",
+  "count": 1,
+  "at": "2026-09-29 14:01"
+ },
+ "what's up?": {
+  "text": "What's up?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 14:01"
+ },
+ "i want to do that.": {
+  "text": "I want to do that.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 14:03"
+ },
+ "what time is it?": {
+  "text": "what time is it?",
+  "lang": "en",
+  "count": 2,
+  "at": "2026-09-29 15:56"
+ },
+ "thank you, and what is the date today?": {
+  "text": "Thank you, and what is the date today?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 15:57"
+ },
+ "what is the latest news about nasa?": {
+  "text": "what is the latest news about NASA?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 15:57"
+ },
+ "i'm sorry, i'm sorry.": {
+  "text": "I'm sorry, I'm sorry.",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 18:31"
+ },
+ "hello iris, can you hear me?": {
+  "text": "Hello Iris, can you hear me?",
+  "lang": "en",
+  "count": 1,
+  "at": "2026-09-29 20:26"
+ }
+}

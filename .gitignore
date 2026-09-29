@@ -7,7 +7,3 @@ voice/venv/
 
 # Downloaded model weights (1.7 GB — whisper / piper / kokoro / mms)
 voice/models/
-
-# Runtime data: learned memory and test session logs
-voice/memory/
-voice/test_logs/
