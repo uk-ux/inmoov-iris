@@ -1,0 +1,5 @@
+2026/09/16-18:40:16.583 7a0c Creating DB U:\inmoov\hardware\twin-browser-test\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/09/16-18:40:16.590 7a0c Reusing MANIFEST U:\inmoov\hardware\twin-browser-test\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/09/16-18:40:16.865 6cb8 Level-0 table #5: started
+2026/09/16-18:40:16.873 6cb8 Level-0 table #5: 683273 bytes OK
+2026/09/16-18:40:16.875 6cb8 Delete type=0 #3

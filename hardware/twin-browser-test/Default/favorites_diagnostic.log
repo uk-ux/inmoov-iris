@@ -1,0 +1,22 @@
+2026-09-16 13:10:13.406: [INFO] CurrentProfilePath: U:\inmoov\hardware\twin-browser-test\Default
+2026-09-16 13:10:13.406: [INFO] Profiles total count: 1
+2026-09-16 13:10:13.406: [INFO] Profile: name=Profile 1 path=U:\inmoov\hardware\twin-browser-test\Default lastActive=2026-09-16T13:10:13.390Z
+2026-09-16 13:10:13.406: [INFO] LastUsedProfileDir: U:\inmoov\hardware\twin-browser-test\Default
+2026-09-16 13:10:13.406: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=U:\inmoov\hardware\twin-browser-test\Default lastActive=2026-09-16T13:10:13.390Z
+2026-09-16 13:10:13.406: [INFO] OnDoneLoading sync enabled: 0
+2026-09-16 13:10:13.406: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-16 13:10:13.406: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-16 13:10:13.406: [INFO] BookmarksSnapshot Startup total=1 bar=1 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-16 13:10:13.458: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-16 13:10:13.568: [INFO] VisibilityChanged: 0
+2026-09-16 13:10:15.701: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-16 13:10:15.706: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:10:15.709: [INFO] Primary account changed.
+2026-09-16 13:10:15.709: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-09-16 13:10:15.717: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:10:15.737: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-16 13:10:16.828: [INFO] BookmarkNodeAdded, ABU: 0
+2026-09-16 13:10:16.828: [INFO] BookmarkNodeAdded, ABU: 0
+2026-09-16 13:10:16.829: [INFO] BookmarkNodeAdded, ABU: 0
+2026-09-16 13:10:16.829: [INFO] BookmarkNodeAdded, ABU: 0
+2026-09-16 13:10:20.679: [INFO] BookmarksSnapshot Shutdown total=4 bar=2 other=0 mobile=0 showBar=0 showBarNTP=1

@@ -1,0 +1,17 @@
+date,status,part,channel,endpoint_a_label,endpoint_a_us,neutral_or_rest_us,endpoint_b_label,endpoint_b_us,notes
+,needs_recheck,Left eye horizontal,0,Left,1300,1477,Right,1700,
+,needs_recheck,Left eye vertical,1,Up,1300,1500,Down,1700,
+,needs_recheck,Right eye horizontal,2,Left,1300,1477,Right,1700,
+,needs_recheck,Right eye vertical,3,Up,1700,1522,Down,1300,Mechanically reversed
+,needs_recheck,Left upper eyelid,4,Open,1322,1322,Closed,1500,Open is rest
+,needs_recheck,Left lower eyelid,5,Open,1588,1588,Closed,1411,Open is rest; reversed pulse order
+,needs_recheck,Right upper eyelid,6,Open,1655,1655,Closed,1500,Open is rest; reversed pulse order
+,needs_recheck,Right lower eyelid,7,Open,1322,1322,Closed,1500,Open is rest
+,needs_recheck,Left eyebrow,8,Lower,1677,1500,Upper,1322,Reversed pulse order
+,needs_recheck,Right eyebrow,9,Lower,1322,1500,Upper,1700,
+,needs_recheck,Nose,10,Down,1366,1411,Up,1500,
+,needs_recheck,Jaw,11,Closed,1300,1300,Fully open,1700,Closed is rest
+,needs_recheck,Left forehead,12,Lower,1344,1455,Upper,1700,
+,needs_recheck,Right forehead,13,Lower,1611,1566,Upper,1322,Reversed pulse order
+,needs_recheck,Left cheek,14,Down,1700,1500,Pulled,1300,Reversed pulse order
+,needs_recheck,Right cheek,15,Down,1300,1500,Pulled,1700,

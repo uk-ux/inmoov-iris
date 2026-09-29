@@ -1,0 +1,173 @@
+#include <Arduino.h>
+#line 1 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+#include <Wire.h>
+#include <EEPROM.h>
+
+// EYELID CALIBRATOR — Arduino Uno + PCA9685
+// Uno A4=SDA, A5=SCL, 5V=PCA VCC, common GND. External supply powers V+.
+// Serial Monitor: 115200 baud. Newline or No line ending both work.
+//
+// 1 = left upper eyelid  CH4
+// 2 = left lower eyelid  CH5
+// 3 = right upper eyelid CH6
+// 4 = right lower eyelid CH7
+//
+// Move: 1 90       Save open: 1 O
+// Save closed: 1 C Save neutral/rest: 1 N
+// Print saved values: P       Disable all outputs: 0
+// Position 0..180 maps to 1300..1700 us; it is not a measured angle.
+
+const uint8_t PCA = 0x40;
+const uint8_t CHANNEL[4] = {4, 5, 6, 7};
+const char *NAME[4] = {"left upper eyelid", "left lower eyelid",
+                       "right upper eyelid", "right lower eyelid"};
+const uint16_t MIN_US = 1300, MAX_US = 1700;
+const int EEPROM_BASE = 128;
+
+struct Calibration { uint16_t openUs, neutralUs, closedUs; };
+Calibration saved[4];
+uint16_t currentUs[4] = {1500, 1500, 1500, 1500};
+char line[16]; uint8_t length = 0; bool discard = false;
+unsigned long lastByte = 0;
+bool ready = false;
+
+#line 32 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+bool writeRegister(uint8_t reg, uint8_t value);
+#line 37 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+bool writePWM(uint8_t channel, uint16_t ticks);
+#line 44 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+bool allOff();
+#line 50 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void fault();
+#line 55 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void loadCalibration();
+#line 64 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void storeCalibration(uint8_t servo);
+#line 68 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void printCalibration();
+#line 78 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void processCommand();
+#line 121 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void setup();
+#line 135 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+void loop();
+#line 32 "U:\\inmoov\\firmware\\eyelid_calibrator_uno\\eyelid_calibrator_uno.ino"
+bool writeRegister(uint8_t reg, uint8_t value) {
+  Wire.beginTransmission(PCA); Wire.write(reg); Wire.write(value);
+  return Wire.endTransmission() == 0;
+}
+
+bool writePWM(uint8_t channel, uint16_t ticks) {
+  Wire.beginTransmission(PCA); Wire.write(0x06 + 4 * channel);
+  Wire.write((uint8_t)0); Wire.write((uint8_t)0);
+  Wire.write((uint8_t)(ticks & 255)); Wire.write((uint8_t)(ticks >> 8));
+  return Wire.endTransmission() == 0;
+}
+
+bool allOff() {
+  bool ok = true;
+  for (uint8_t ch = 0; ch < 16; ++ch) if (!writePWM(ch, 4096)) ok = false;
+  return ok;
+}
+
+void fault() {
+  ready = false; allOff();
+  Serial.println(F("I2C FAULT: cut servo power and check VCC/GND/SDA/SCL."));
+}
+
+void loadCalibration() {
+  for (uint8_t i = 0; i < 4; ++i) {
+    EEPROM.get(EEPROM_BASE + i * sizeof(Calibration), saved[i]);
+    if (saved[i].openUs < MIN_US || saved[i].openUs > MAX_US) saved[i].openUs = 0;
+    if (saved[i].neutralUs < MIN_US || saved[i].neutralUs > MAX_US) saved[i].neutralUs = 0;
+    if (saved[i].closedUs < MIN_US || saved[i].closedUs > MAX_US) saved[i].closedUs = 0;
+  }
+}
+
+void storeCalibration(uint8_t servo) {
+  EEPROM.put(EEPROM_BASE + servo * sizeof(Calibration), saved[servo]);
+}
+
+void printCalibration() {
+  Serial.println(F("servo,channel,open_us,neutral_us,closed_us"));
+  for (uint8_t i = 0; i < 4; ++i) {
+    Serial.print(i + 1); Serial.print(','); Serial.print(CHANNEL[i]);
+    Serial.print(','); Serial.print(saved[i].openUs);
+    Serial.print(','); Serial.print(saved[i].neutralUs);
+    Serial.print(','); Serial.println(saved[i].closedUs);
+  }
+}
+
+void processCommand() {
+  if (discard || length == 0) return;
+  if (length == 1 && line[0] == '0') {
+    if (!allOff()) fault(); else Serial.println(F("OFF"));
+    return;
+  }
+  if (length == 1 && (line[0] == 'P' || line[0] == 'p')) {
+    printCalibration(); return;
+  }
+  if (!ready || length < 3 || line[0] < '1' || line[0] > '4' || line[1] != ' ') return;
+
+  uint8_t servo = line[0] - '1';
+  uint8_t p = 2; while (p < length && line[p] == ' ') ++p;
+
+  if (p + 1 == length) {
+    char mark = line[p];
+    if (mark == 'O' || mark == 'o') saved[servo].openUs = currentUs[servo];
+    else if (mark == 'N' || mark == 'n') saved[servo].neutralUs = currentUs[servo];
+    else if (mark == 'C' || mark == 'c') saved[servo].closedUs = currentUs[servo];
+    else return;
+    storeCalibration(servo);
+    Serial.print(NAME[servo]); Serial.print(F(" saved at "));
+    Serial.print(currentUs[servo]); Serial.println(F(" us"));
+    return;
+  }
+
+  int position = 0; bool digit = false;
+  while (p < length && line[p] >= '0' && line[p] <= '9') {
+    digit = true; position = position * 10 + line[p++] - '0';
+    if (position > 180) return;
+  }
+  while (p < length && line[p] == ' ') ++p;
+  if (!digit || p != length) return;
+
+  currentUs[servo] = MIN_US + (long)position * (MAX_US - MIN_US) / 180;
+  if (!allOff()) { fault(); return; }
+  uint16_t ticks = ((unsigned long)currentUs[servo] * 4096 + 10000) / 20000;
+  if (!writePWM(CHANNEL[servo], ticks)) { fault(); return; }
+  Serial.print(NAME[servo]); Serial.print(F(" CH")); Serial.print(CHANNEL[servo]);
+  Serial.print(F(" position ")); Serial.print(position);
+  Serial.print(F(" pulse ")); Serial.print(currentUs[servo]); Serial.println(F(" us"));
+}
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(); Wire.setClock(100000); Wire.setWireTimeout(25000, true);
+  Wire.beginTransmission(PCA);
+  if (Wire.endTransmission() != 0) { fault(); return; }
+  if (!writeRegister(0x00, 0x10) || !writeRegister(0xFE, 121) ||
+      !writeRegister(0x00, 0x20)) { fault(); return; }
+  delay(5);
+  if (!writeRegister(0x00, 0xA0) || !allOff()) { fault(); return; }
+  loadCalibration(); ready = true;
+  Serial.println(F("READY eyelid calibration CH4-7 - outputs OFF"));
+  Serial.println(F("Move 1 90 | Save 1 O/N/C | Print P | Off 0"));
+}
+
+void loop() {
+  while (Serial.available()) {
+    char c = Serial.read(); lastByte = millis();
+    if (c == '\r' || c == '\n') {
+      if (length || discard) processCommand();
+      length = 0; discard = false;
+    } else if (!discard) {
+      if (length < sizeof(line)) line[length++] = c;
+      else discard = true;
+    }
+  }
+  if ((length || discard) && millis() - lastByte >= 40) {
+    processCommand(); length = 0; discard = false;
+  }
+}
+

@@ -1,0 +1,42 @@
+#include <Wire.h>
+
+// Keep external servo power OFF during diagnosis. Uno A4=SDA, A5=SCL.
+// This scans addresses and reads MODE1; it does not command servo movement.
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  Wire.setClock(100000);
+  Wire.setWireTimeout(25000, true);
+  delay(1000);
+  Serial.println(F("I2C diagnostic: external servo power must stay OFF"));
+  Serial.print(F("SDA level: ")); Serial.println(digitalRead(A4));
+  Serial.print(F("SCL level: ")); Serial.println(digitalRead(A5));
+  uint8_t found = 0;
+  for (uint8_t address = 1; address < 127; ++address) {
+    Wire.clearWireTimeoutFlag();
+    Wire.beginTransmission(address);
+    uint8_t status = Wire.endTransmission();
+    if (Wire.getWireTimeoutFlag()) {
+      Serial.println(F("Bus timeout: check SDA/SCL wiring or stuck device."));
+      return;
+    }
+    if (status == 0) {
+      ++found;
+      Serial.print(F("Detected address 0x")); Serial.println(address, HEX);
+    } else if (status != 2) {
+      Serial.print(F("Address 0x")); Serial.print(address, HEX);
+      Serial.print(F(" error ")); Serial.println(status);
+    }
+  }
+  if (!found) Serial.println(F("No I2C devices detected."));
+  Wire.beginTransmission(0x40);
+  Wire.write((uint8_t)0x00);
+  uint8_t status = Wire.endTransmission(false);
+  Serial.print(F("PCA 0x40 register-select status: ")); Serial.println(status);
+  if (status == 0 && Wire.requestFrom((uint8_t)0x40, (uint8_t)1) == 1) {
+    Serial.print(F("MODE1: 0x")); Serial.println(Wire.read(), HEX);
+  }
+  Serial.println(F("Scan complete. RESET repeats the test."));
+}
+
+void loop() {}

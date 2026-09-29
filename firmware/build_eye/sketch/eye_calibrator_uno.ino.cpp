@@ -1,0 +1,128 @@
+#include <Arduino.h>
+#line 1 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+#include <Wire.h>
+#include <EEPROM.h>
+
+// Uno A4=SDA, A5=SCL, 5V=VCC, common GND. Servo power goes to PCA V+.
+// Channels: 1=left eye horizontal CH0, 2=left eye vertical CH1,
+//           3=right eye horizontal CH2, 4=right eye vertical CH3.
+// Serial 115200 + Newline: "1 90" moves; "1 N/L/U" saves; P prints; 0 off.
+// Position 0..180 maps to 1300..1700 us and is not physical degrees.
+const uint8_t ADDRESS = 0x40;
+const uint8_t CHANNELS[4] = {0, 1, 2, 3};
+const char *NAMES[4] = {"left eye horizontal", "left eye vertical",
+                        "right eye horizontal", "right eye vertical"};
+const uint16_t HARD_MIN = 1300, HARD_MAX = 1700;
+struct Joint { uint16_t pulse, lower, neutral, upper; };
+Joint joints[4] = {{1500,0,0,0},{1500,0,0,0},{1500,0,0,0},{1500,0,0,0}};
+int selected = 0;
+bool ready = false, outputEnabled = false;
+char line[16]; uint8_t length = 0; bool discard = false;
+
+#line 20 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+bool regWrite(uint8_t reg, uint8_t value);
+#line 24 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+bool pwmWrite(uint8_t ch, uint16_t ticks);
+#line 30 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+bool off();
+#line 35 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void fault();
+#line 36 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+bool sendSelected();
+#line 45 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void save(uint8_t i);
+#line 50 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void load();
+#line 60 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void printTable();
+#line 67 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void process();
+#line 89 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void setup();
+#line 96 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+void loop();
+#line 20 "U:\\inmoov\\firmware\\eye_calibrator_uno\\eye_calibrator_uno.ino"
+bool regWrite(uint8_t reg, uint8_t value) {
+  Wire.beginTransmission(ADDRESS); Wire.write(reg); Wire.write(value);
+  return Wire.endTransmission() == 0;
+}
+bool pwmWrite(uint8_t ch, uint16_t ticks) {
+  Wire.beginTransmission(ADDRESS); Wire.write(0x06 + 4 * ch);
+  Wire.write((uint8_t)0); Wire.write((uint8_t)0);
+  Wire.write((uint8_t)(ticks & 255)); Wire.write((uint8_t)(ticks >> 8));
+  return Wire.endTransmission() == 0;
+}
+bool off() {
+  outputEnabled = false; bool ok = true;
+  for (uint8_t ch=0; ch<16; ++ch) if (!pwmWrite(ch,4096)) ok=false;
+  return ok;
+}
+void fault() { ready=false; off(); Serial.println(F("I2C FAULT: cut servo power and check wiring.")); }
+bool sendSelected() {
+  uint16_t ticks=((unsigned long)joints[selected].pulse*4096+10000)/20000;
+  if (!pwmWrite(CHANNELS[selected],ticks)) { fault(); return false; }
+  outputEnabled=true;
+  Serial.print(NAMES[selected]); Serial.print(F(" CH"));
+  Serial.print(CHANNELS[selected]); Serial.print(F(" pulse "));
+  Serial.print(joints[selected].pulse); Serial.println(F(" us"));
+  return true;
+}
+void save(uint8_t i) {
+  int a=32+i*8;
+  EEPROM.put(a+0,joints[i].lower); EEPROM.put(a+2,joints[i].neutral);
+  EEPROM.put(a+4,joints[i].upper);
+}
+void load() {
+  for (uint8_t i=0;i<4;++i) {
+    int a=32+i*8;
+    EEPROM.get(a+0,joints[i].lower); EEPROM.get(a+2,joints[i].neutral);
+    EEPROM.get(a+4,joints[i].upper);
+    if (joints[i].lower<HARD_MIN || joints[i].lower>HARD_MAX) joints[i].lower=0;
+    if (joints[i].neutral<HARD_MIN || joints[i].neutral>HARD_MAX) joints[i].neutral=0;
+    if (joints[i].upper<HARD_MIN || joints[i].upper>HARD_MAX) joints[i].upper=0;
+  }
+}
+void printTable() {
+  Serial.println(F("joint,channel,lower_us,neutral_us,upper_us"));
+  for(uint8_t i=0;i<4;++i){ Serial.print(NAMES[i]); Serial.print(',');
+    Serial.print(CHANNELS[i]); Serial.print(','); Serial.print(joints[i].lower);
+    Serial.print(','); Serial.print(joints[i].neutral); Serial.print(',');
+    Serial.println(joints[i].upper); }
+}
+void process() {
+  if (discard || !length) return;
+  if (length==1 && line[0]=='0') { if(!off()) fault(); else Serial.println(F("OFF")); return; }
+  if (length==1 && (line[0]=='P'||line[0]=='p')) { printTable(); return; }
+  if (!ready || length<3 || line[0]<'1'||line[0]>'4'||line[1]!=' ') return;
+  selected=line[0]-'1'; uint8_t p=2;
+  while(p<length&&line[p]==' ')++p;
+  if(p+1==length&&(line[p]=='N'||line[p]=='n'||line[p]=='L'||line[p]=='l'||line[p]=='U'||line[p]=='u')){
+    char mark=line[p];
+    if(mark=='N'||mark=='n')joints[selected].neutral=joints[selected].pulse;
+    if(mark=='L'||mark=='l')joints[selected].lower=joints[selected].pulse;
+    if(mark=='U'||mark=='u')joints[selected].upper=joints[selected].pulse;
+    save(selected); Serial.println(F("Saved to EEPROM.")); return;
+  }
+  int pos=0; bool digit=false;
+  while(p<length&&line[p]>='0'&&line[p]<='9'){digit=true;pos=pos*10+line[p++]-'0';if(pos>180)return;}
+  while(p<length&&line[p]==' ')++p;
+  if(!digit||p!=length||pos<0||pos>180)return;
+  if(!off()) { fault(); return; }
+  joints[selected].pulse=1300+(long)pos*400/180;
+  sendSelected();
+}
+void setup() {
+  Serial.begin(115200); Wire.begin(); Wire.setWireTimeout(25000,true);
+  if(!off()||!regWrite(0x00,0x10)||!regWrite(0xFE,121)||!regWrite(0x00,0x20)){fault();return;}
+  delay(5); if(!regWrite(0x00,0xA0)||!off()){fault();return;}
+  load(); ready=true; Serial.println(F("READY eye calibrator CH0-3; outputs OFF"));
+  Serial.println(F("Move: 1 90 | Save: 1 N, 1 L, 1 U | Print: P | Off: 0"));
+}
+void loop() {
+  while(Serial.available()){
+    char c=Serial.read();
+    if(c=='\r'||c=='\n'){process();length=0;discard=false;}
+    else if(!discard){if(length<sizeof(line))line[length++]=c;else discard=true;}
+  }
+}
+

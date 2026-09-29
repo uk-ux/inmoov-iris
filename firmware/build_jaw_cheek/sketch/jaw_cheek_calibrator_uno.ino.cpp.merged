@@ -1,0 +1,121 @@
+#include <Arduino.h>
+#line 1 "U:\\inmoov\\firmware\\jaw_cheek_calibrator_uno\\jaw_cheek_calibrator_uno.ino"
+#include <Wire.h>
+#include <EEPROM.h>
+
+// Uno + PCA9685: A4 SDA, A5 SCL, common GND, external servo power to V+.
+// Serial Monitor 115200 baud, Newline. No extra libraries required.
+// 1 90 = jaw CH11, 2 90 = left cheek CH14, 3 90 = right cheek CH15.
+// Position 0..180 maps to 1300..1700 us, NOT physical degrees.
+// 1 N saves jaw neutral; 1 D saves down; 1 U saves up. P prints, X outputs OFF.
+// Jaw: D = open/down, U = closed/up. Cheeks: D = down, U = up/pulled.
+// Saved endpoints are records, not enforced limits during calibration.
+const uint8_t PCA=0x40, CHANNELS[3]={11,14,15};
+const char *NAMES[3]={"jaw","left cheek","right cheek"};
+const int MIN_US=1300, MAX_US=1700, EEPROM_BASE=224;
+struct Calibration {uint16_t lower,neutral,upper;};
+struct Record {uint16_t magic; Calibration joints[3];};
+Record saved={0x4A31,{{0,0,0},{0,0,0},{0,0,0}}};
+uint8_t selected=0;
+bool ready=false,enabled=false,discard=false;
+int currentUs=1500,targetUs=1500;
+char line[12];uint8_t length=0;
+unsigned long frame=0;
+
+bool regWrite(uint8_t reg,uint8_t value){
+  Wire.beginTransmission(PCA);Wire.write(reg);Wire.write(value);
+  return Wire.endTransmission()==0;
+}
+bool pwm(uint8_t ch,uint16_t ticks){
+  Wire.beginTransmission(PCA);Wire.write(0x06+4*ch);
+  Wire.write((uint8_t)0);Wire.write((uint8_t)0);
+  Wire.write((uint8_t)(ticks&255));Wire.write((uint8_t)(ticks>>8));
+  return Wire.endTransmission()==0;
+}
+bool off(){
+  enabled=false;targetUs=currentUs;
+  bool ok=true;for(uint8_t ch=0;ch<16;ch++)if(!pwm(ch,4096))ok=false;
+  return ok;
+}
+void fault(){ready=false;off();Serial.println(F("I2C FAULT: cut servo power, check wiring, reset to retry."));}
+bool sendPulse(){
+  if(!pwm(CHANNELS[selected],((long)currentUs*4096+10000)/20000)){fault();return false;}
+  return true;
+}
+bool valid(uint16_t p){return p==0||(p>=MIN_US&&p<=MAX_US);}
+void printSaved(){
+  Serial.println(F("servo,channel,lower_us,neutral_us,upper_us"));
+  for(uint8_t i=0;i<3;i++){
+    Serial.print(i+1);Serial.print(',');Serial.print(CHANNELS[i]);Serial.print(',');
+    Serial.print(saved.joints[i].lower);Serial.print(',');
+    Serial.print(saved.joints[i].neutral);Serial.print(',');Serial.println(saved.joints[i].upper);
+  }
+  Serial.println(F("Zero = not saved. Jaw lower=open, upper=closed."));
+}
+void report(){Serial.print(NAMES[selected]);Serial.print(F(" CH"));Serial.print(CHANNELS[selected]);Serial.print(F(" pulse "));Serial.print(currentUs);Serial.print(F(" us - save with "));Serial.print(selected+1);Serial.println(F(" N / D / U"));}
+void command(){
+  if(discard){Serial.println(F("Command too long"));return;}
+  if(!length)return;
+  if(length==1){
+    char c=line[0];if(c>='a'&&c<='z')c-=32;
+    if(c=='P'){printSaved();return;}
+    if(c=='X'){if(!off())fault();else Serial.println(F("All outputs OFF"));return;}
+  }
+  if(length<3||line[0]<'1'||line[0]>'3'||line[1]!=' '){
+    Serial.println(F("Move: 1 90 / 2 90 / 3 90. Save: 1 N / 1 D / 1 U. P table. X off."));return;
+  }
+  uint8_t requested=line[0]-'1',p=2;
+  while(p<length&&line[p]==' ')p++;
+  while(length>p&&line[length-1]==' ')length--;
+  if(p==length){Serial.println(F("Missing position or N/D/U"));return;}
+  if(p+1==length){
+    char c=line[p];if(c>='a'&&c<='z')c-=32;
+    if(c=='N'||c=='D'||c=='U'){
+      if(!ready||!enabled||requested!=selected||currentUs!=targetUs){Serial.println(F("Move THAT servo first; wait until motion finishes, then save."));return;}
+      if(c=='N')saved.joints[selected].neutral=currentUs;
+      if(c=='D')saved.joints[selected].lower=currentUs;
+      if(c=='U')saved.joints[selected].upper=currentUs;
+      EEPROM.put(EEPROM_BASE,saved);printSaved();return;
+    }
+  }
+  int position=0;
+  for(uint8_t i=p;i<length;i++){
+    if(line[i]<'0'||line[i]>'9'){Serial.println(F("Example: 1 90 or 1 N"));return;}
+    position=position*10+line[i]-'0';
+    if(position>180){Serial.println(F("Position must be 0..180"));return;}
+  }
+  if(!ready)return;
+  if(requested!=selected){if(!off()){fault();return;}selected=requested;}
+  targetUs=MIN_US+(long)position*(MAX_US-MIN_US)/180;
+  if(!enabled){
+    // No position feedback: the first enable can jump to this pulse.
+    currentUs=targetUs;if(!sendPulse())return;enabled=true;report();
+  }else if(currentUs==targetUs)report();
+}
+void setup(){
+  Serial.begin(115200);Wire.begin();Wire.setClock(100000);Wire.setWireTimeout(25000,true);
+  if(!off()||!regWrite(0x00,0x10)||!regWrite(0xFE,121)||!regWrite(0x00,0x20)){fault();return;}
+  delay(5);if(!regWrite(0x00,0xA0)||!off()){fault();return;}
+  Record loaded;EEPROM.get(EEPROM_BASE,loaded);
+  bool usable=loaded.magic==saved.magic;
+  for(uint8_t i=0;i<3;i++)if(!valid(loaded.joints[i].lower)||!valid(loaded.joints[i].neutral)||!valid(loaded.joints[i].upper))usable=false;
+  if(usable)saved=loaded;
+  ready=true;
+  Serial.println(F("READY SIMPLE jaw + cheeks. All outputs OFF."));
+  Serial.println(F("1 90 jaw | 2 90 left cheek | 3 90 right cheek"));
+  Serial.println(F("1 N neutral | 1 D down | 1 U up | P table | X off"));
+  Serial.println(F("Newline required. 1300..1700 us is a test window, NOT verified mechanical limits."));
+  printSaved();
+}
+void loop(){
+  while(Serial.available()){
+    char c=Serial.read();
+    if(c=='\r'||c=='\n'){command();length=0;discard=false;}
+    else if(!discard){if(length<sizeof(line))line[length++]=c;else discard=true;}
+  }
+  if(!ready||!enabled||currentUs==targetUs||millis()-frame<20)return;
+  frame=millis();currentUs+=constrain(targetUs-currentUs,-4,4);
+  if(!sendPulse())return;
+  if(currentUs==targetUs)report();
+}
+

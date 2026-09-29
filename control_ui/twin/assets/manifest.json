@@ -1,0 +1,605 @@
+{
+  "author": "Gael Langevin / InMoov",
+  "license": "CC BY-NC 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-nc/3.0/",
+  "sources": [
+    "https://inmoov.fr/inmoov-stl-parts-viewer/?bodyparts=i2Head",
+    "https://inmoov.fr/inmoov-stl-parts-viewer/?bodyparts=i2Eyes"
+  ],
+  "parts": [
+    {
+      "file": "BottomTeethV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/BottomTeethV1.stl",
+      "triangles": 217558,
+      "bytes": 10877984,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        56.6949462890625,
+        28.158538818359375,
+        15.917364120483398
+      ],
+      "sha256": "8c9fc036e95ef0261552c3f97cfd2d48c639ac72f69c3c5ac2aa245544b93b5b"
+    },
+    {
+      "file": "CheekPullerV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/CheekPullerV3.stl",
+      "triangles": 1936,
+      "bytes": 96884,
+      "min": [
+        74.430908203125,
+        -23.82072639465332,
+        -7.152557373046875e-07
+      ],
+      "max": [
+        105.06243896484375,
+        23.03231430053711,
+        9.844731330871582
+      ],
+      "sha256": "0f4a32019cb3421f715878b058c57b51fd72edab7230a7aad0cceb063993b65b"
+    },
+    {
+      "file": "EarLockV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/EarLockV1.stl",
+      "triangles": 4408,
+      "bytes": 220484,
+      "min": [
+        0.41606903076171875,
+        6.814533233642578,
+        0.0
+      ],
+      "max": [
+        122.28276062011719,
+        79.8131332397461,
+        12.667901039123535
+      ],
+      "sha256": "a70b73b76a0841384dfcdf0faba7331877bec29d9349703960e0e63d89370d18"
+    },
+    {
+      "file": "EyebrowSupportV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/EyebrowSupportV3.stl",
+      "triangles": 1954,
+      "bytes": 97784,
+      "min": [
+        -41.7998161315918,
+        -19.22065544128418,
+        1.9073486328125e-06
+      ],
+      "max": [
+        41.92213821411133,
+        54.35687255859375,
+        73.353271484375
+      ],
+      "sha256": "12e22799553b885dcee8232b5cc55e11fc2f5c0bd348b243ad63d6c1cc3af6a5"
+    },
+    {
+      "file": "EyebrowV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/EyebrowV3.stl",
+      "triangles": 4560,
+      "bytes": 228084,
+      "min": [
+        -17.871261596679688,
+        -21.22744369506836,
+        0.0
+      ],
+      "max": [
+        19.574874877929688,
+        24.863346099853516,
+        14.253820419311523
+      ],
+      "sha256": "db09666c20916162d833cf54da7286e8773de4a39a223a059bfba061e4363eaa"
+    },
+    {
+      "file": "FaceHolderLeftV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/FaceHolderLeftV5.stl",
+      "triangles": 1630,
+      "bytes": 81584,
+      "min": [
+        -28.355987548828125,
+        -57.06322479248047,
+        0.0
+      ],
+      "max": [
+        30.654006958007812,
+        50.72498321533203,
+        18.59429359436035
+      ],
+      "sha256": "49b48441b14f8fedc98292c7d0cb1c8d9d0efe9f398d0e0d99b7638f0d05ccbb"
+    },
+    {
+      "file": "FaceHolderRightV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/FaceHolderRightV5.stl",
+      "triangles": 1468,
+      "bytes": 73484,
+      "min": [
+        -25.468910217285156,
+        -57.06322479248047,
+        0.0
+      ],
+      "max": [
+        21.72137451171875,
+        50.72498321533203,
+        18.593313217163086
+      ],
+      "sha256": "1b71f421b366c56ac5e4405117af92daca570cada8f942756a08ce506f5d267f"
+    },
+    {
+      "file": "ForHeadSupportV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/ForHeadSupportV2.stl",
+      "triangles": 1548,
+      "bytes": 77484,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        83.73724365234375,
+        33.61262512207031,
+        22.005950927734375
+      ],
+      "sha256": "0ae913a4656cc4f79742ba0977ff8edf623f50c3bebafb8e6e88d630d0a6e8d6"
+    },
+    {
+      "file": "ForHeadsV4.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/ForHeadsV4.stl",
+      "triangles": 1976,
+      "bytes": 98884,
+      "min": [
+        -9.195043563842773,
+        -11.561798095703125,
+        0.0
+      ],
+      "max": [
+        14.89328384399414,
+        12.762277603149414,
+        33.59733963012695
+      ],
+      "sha256": "6fa62cf4456c3dc454df2702ab2dfc87e4a5523de960d334cf0d9cb376e6c057"
+    },
+    {
+      "file": "GearHolderV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/GearHolderV3.stl",
+      "triangles": 1076,
+      "bytes": 53884,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        53.908782958984375,
+        104.45756530761719,
+        57.505271911621094
+      ],
+      "sha256": "c01a70ac027fa51d95d38a887f8d2384d9fabec91542808db3d98628e8d7e94a"
+    },
+    {
+      "file": "JawHingeV4.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/JawHingeV4.stl",
+      "triangles": 472,
+      "bytes": 23684,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        64.86190795898438,
+        34.92093276977539,
+        19.74474334716797
+      ],
+      "sha256": "f4d23215c7eec52a337ae62b9d9c2ac3c621a88fdb709b4bc3a470ebcafe01e3"
+    },
+    {
+      "file": "JawPistonV1NoSupport.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/JawPistonV1NoSupport.stl",
+      "triangles": 9564,
+      "bytes": 478284,
+      "min": [
+        -43.01136016845703,
+        -11.38228988647461,
+        0.0
+      ],
+      "max": [
+        52.96898651123047,
+        32.63364791870117,
+        34.60200881958008
+      ],
+      "sha256": "4a234f6c6a77fe3699093ea56c327458e5fcd7c5b42fb12223b3501167d838b6"
+    },
+    {
+      "file": "JawSupportV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/JawSupportV2.stl",
+      "triangles": 1020,
+      "bytes": 51084,
+      "min": [
+        -13.962120056152344,
+        -17.18798828125,
+        3.5762786865234375e-07
+      ],
+      "max": [
+        50.76064682006836,
+        85.11190032958984,
+        7.331468105316162
+      ],
+      "sha256": "6c50caa6c9d4ab1237206086d2fa9889feee445e45b08f641bb91840cb0f71c0"
+    },
+    {
+      "file": "JawV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/JawV5.stl",
+      "triangles": 10838,
+      "bytes": 541984,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        116.83204650878906,
+        61.773109436035156,
+        66.88070678710938
+      ],
+      "sha256": "8ec30cf7ee3955d8b10577be5a630d405a1553545b6c17640170ea38c1bd1b7a"
+    },
+    {
+      "file": "LowBackV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/LowBackV5.stl",
+      "triangles": 94752,
+      "bytes": 4737684,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        136.0792236328125,
+        70.01416015625,
+        65.57733917236328
+      ],
+      "sha256": "c518c6fb24804963f110acd6cdbb55f3701295c9473ae8990727c934f83863a3"
+    },
+    {
+      "file": "MainGearV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/MainGearV2.stl",
+      "triangles": 2302,
+      "bytes": 115184,
+      "min": [
+        -20.935577392578125,
+        -21.14495277404785,
+        0.0
+      ],
+      "max": [
+        21.724411010742188,
+        21.52004623413086,
+        32.834991455078125
+      ],
+      "sha256": "e43f76d71c1417eb50c8ec36050350467e9ff4b34d4f2d144ac497a1296b29e4"
+    },
+    {
+      "file": "PCA9685ConnectV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/PCA9685ConnectV2.stl",
+      "triangles": 3760,
+      "bytes": 188084,
+      "min": [
+        -17.03390884399414,
+        -46.13351058959961,
+        1.430511474609375e-06
+      ],
+      "max": [
+        14.096071243286133,
+        31.856048583984375,
+        51.11445617675781
+      ],
+      "sha256": "38d3b0fc085e8f0f4e67f3992ed05e5087c9ebb64cceab708bad01ca2cb7bf35"
+    },
+    {
+      "file": "PCA9685supportV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/PCA9685supportV1.stl",
+      "triangles": 3184,
+      "bytes": 159284,
+      "min": [
+        0.0,
+        0.0,
+        -2.980034992106084e-07
+      ],
+      "max": [
+        62.499996185302734,
+        25.0,
+        5.500000953674316
+      ],
+      "sha256": "0129afc2449761ba0de9bc41be78eabaf58c2d4056172026ad50139076807caa"
+    },
+    {
+      "file": "RingV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/RingV2.stl",
+      "triangles": 912,
+      "bytes": 45684,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        44.292755126953125,
+        44.293006896972656,
+        9.08343505859375
+      ],
+      "sha256": "c0961c460e53fd82ee536d9af234881d98cab8cdd7570abe03d40c4a1753b250"
+    },
+    {
+      "file": "ServoGearV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/ServoGearV2.stl",
+      "triangles": 2352,
+      "bytes": 117684,
+      "min": [
+        -21.564001083374023,
+        -21.360000610351562,
+        0.0
+      ],
+      "max": [
+        21.09600067138672,
+        21.299999237060547,
+        44.970001220703125
+      ],
+      "sha256": "ce037874dc07b186d9e026bda67033ac947d9ffd11374c159b4cdb758b02eaf0"
+    },
+    {
+      "file": "SkullServoFixV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/SkullServoFixV5.stl",
+      "triangles": 3038,
+      "bytes": 151984,
+      "min": [
+        -42.29522705078125,
+        -64.41389465332031,
+        0.0
+      ],
+      "max": [
+        42.295196533203125,
+        64.41389465332031,
+        76.66619873046875
+      ],
+      "sha256": "1bf3886c1575c508c091b87b4339db36c5cc7ce1dc823374e3f574e07d20cfcc"
+    },
+    {
+      "file": "TeethTopHolderV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/TeethTopHolderV3.stl",
+      "triangles": 1476,
+      "bytes": 73884,
+      "min": [
+        -31.246585845947266,
+        -23.861032485961914,
+        -1.430511474609375e-06
+      ],
+      "max": [
+        30.349964141845703,
+        27.427858352661133,
+        20.220787048339844
+      ],
+      "sha256": "21925dd7553d361464626e28c56cbaf425a1b5e22774b733ff51b53fcdf7d410"
+    },
+    {
+      "file": "TopBackskullV4.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/TopBackskullV4.stl",
+      "triangles": 103456,
+      "bytes": 5172884,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        134.9178009033203,
+        81.71823120117188,
+        54.346981048583984
+      ],
+      "sha256": "4e0184fcdb7c8168d0aca7a0ce46c62c15f0e56f69d7c77d4b8382bfd5099a8f"
+    },
+    {
+      "file": "TopTeethV3.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/TopTeethV3.stl",
+      "triangles": 30518,
+      "bytes": 1525984,
+      "min": [
+        5.7220458984375e-06,
+        0.0,
+        0.0
+      ],
+      "max": [
+        57.27654266357422,
+        29.298532485961914,
+        23.042329788208008
+      ],
+      "sha256": "712d88e0c5f72c80229dd0be4f3305c0581dd13cd0d18fac9d00b28fa86fdb54"
+    },
+    {
+      "file": "TopskullFrontV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/TopskullFrontV1.stl",
+      "triangles": 63924,
+      "bytes": 3196284,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        133.3631591796875,
+        88.78668975830078,
+        56.95198440551758
+      ],
+      "sha256": "48c57695176fb53cb223df3a6978fc4a4bbc2edf816482b5d2e23a4d093224cd"
+    },
+    {
+      "file": "TopskullV5.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/TopskullV5.stl",
+      "triangles": 46200,
+      "bytes": 2310084,
+      "min": [
+        -46.8156623840332,
+        57.46384048461914,
+        -7.152557373046875e-07
+      ],
+      "max": [
+        95.86857604980469,
+        137.97036743164062,
+        53.590362548828125
+      ],
+      "sha256": "c705d03aa915fabfacd96a00f5fe81de90181952dae9ce3a4febe00ccc61540a"
+    },
+    {
+      "file": "UpperLipV2.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/UpperLipV2.stl",
+      "triangles": 1034,
+      "bytes": 51784,
+      "min": [
+        3.814697265625e-06,
+        9.5367431640625e-07,
+        -9.5367431640625e-07
+      ],
+      "max": [
+        26.46290397644043,
+        38.219268798828125,
+        29.248573303222656
+      ],
+      "sha256": "12a99ad3678ab69257e7e1268753287ed1450c809ef154c4cef2c2f4b255ab39"
+    },
+    {
+      "file": "servoAdapterV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/servoAdapterV1.stl",
+      "triangles": 778,
+      "bytes": 38984,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        84.35000610351562,
+        30.490001678466797,
+        5.48488712310791
+      ],
+      "sha256": "0ceadb45bd0aabc64fe51c8007b8aacb172abe40b4c22f1e1f254b47d13180b4"
+    },
+    {
+      "file": "servoHornAdapterV1.stl",
+      "group": "i2Head",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Head/servoHornAdapterV1.stl",
+      "triangles": 1600,
+      "bytes": 80084,
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        31.531539916992188,
+        31.586130142211914,
+        13.761856079101562
+      ],
+      "sha256": "3ab19c514109bb587e5759a651a8e50a4a5117efa9b8d0d50e686ac6fe2a9419"
+    },
+    {
+      "file": "Eye-L-AllPartsV2.stl",
+      "group": "i2Eyes",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Eyes/Eye-L-AllPartsV2.stl",
+      "triangles": 25490,
+      "bytes": 1274584,
+      "min": [
+        -39.21842956542969,
+        -49.331382751464844,
+        0.0
+      ],
+      "max": [
+        50.50876998901367,
+        63.533233642578125,
+        36.380027770996094
+      ],
+      "sha256": "71b50d79fff514290fee41377cdcbdcf0b79286cec13d5554a00dde309259aac"
+    },
+    {
+      "file": "Eye-L-BaseV5.stl",
+      "group": "i2Eyes",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Eyes/Eye-L-BaseV5.stl",
+      "triangles": 1566,
+      "bytes": 78384,
+      "min": [
+        -31.288057327270508,
+        -36.467315673828125,
+        -1.344367054744583e-13
+      ],
+      "max": [
+        29.539302825927734,
+        53.93780517578125,
+        25.85688018798828
+      ],
+      "sha256": "64bceea9d950a51debf386af983a11d4475ced1006f65fac22aa3ad2bcde0a9b"
+    },
+    {
+      "file": "Eye-R-AllPartsV2.stl",
+      "group": "i2Eyes",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Eyes/Eye-R-AllPartsV2.stl",
+      "triangles": 25490,
+      "bytes": 1274584,
+      "min": [
+        -44.733673095703125,
+        -49.331382751464844,
+        0.0
+      ],
+      "max": [
+        44.99352264404297,
+        63.533233642578125,
+        36.380027770996094
+      ],
+      "sha256": "79516667ebe91cdd67f01a05d30a117b64ebb2e679c6c6b2d289a6a202a7e2d5"
+    },
+    {
+      "file": "Eye-R-BaseV5.stl",
+      "group": "i2Eyes",
+      "url": "https://inmoov.fr/wp-content/uploads/stl/i2Eyes/Eye-R-BaseV5.stl",
+      "triangles": 1566,
+      "bytes": 78384,
+      "min": [
+        -29.190021514892578,
+        -36.467315673828125,
+        -1.344367054744583e-13
+      ],
+      "max": [
+        31.637338638305664,
+        53.93780517578125,
+        25.85688018798828
+      ],
+      "sha256": "7b03d4f2254d7fcb6a53070a7a90a80c8c7d2923be51d3962b286138e8be561d"
+    }
+  ]
+}
